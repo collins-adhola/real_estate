@@ -62,8 +62,11 @@ def login(request):
       auth.login(request, user)
       messages.success(request, 'You are logged in')
       return redirect('dashboard')
+    else:
+      messages.error(request, 'invalid credentials') 
+      return redirect('login') 
 
-    # Login User
+    #Login User
   else:  
     return render(request, 'accounts/login.html')  
 
