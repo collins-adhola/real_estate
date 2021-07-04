@@ -46,11 +46,6 @@ def register(request):
   else:  
     return render(request, 'accounts/register.html')
 
-
-
-
-
-
 def login(request):
   if request.method == 'POST':
     username = request.POST['username']
@@ -71,7 +66,10 @@ def login(request):
     return render(request, 'accounts/login.html')  
 
 def logout(request):
-  return redirect('index')
+  if request.method == 'POST':
+    auth.logout(request)
+    messages.success(request, 'You are logged out')
+    return redirect('index')
 
 def dashboard(request):
   return render(request, 'accounts/dashboard.html')  
